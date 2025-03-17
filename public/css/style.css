@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ae61e5;  /* Violet */
+    --secondary-color: #121212; /* Noir */
+    --neutral-color: #B3B3B3;  /* Gris neutre */
+    --text-color: #151010; /* Texte clair */
+}
+
+
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    align-items: center; /* Centre horizontalement */
+    justify-content: center; /* Centre verticalement si besoin */
+    min-height: 100vh; /* Prend toute la hauteur */
+    background-color: rgb(195, 189, 185); /* Couleur neutre */
+    text-align: center;
+    
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    text-align: center;
+}
+
+a:hover {
+    color: #8b5fd4;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #8B5FD4;
+}
+
+
+.card {
+    background-color:  rgb(184, 229, 88);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.104);
+}
+
+.div {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+.container {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    
+}
+.big{
+    background-color: rgb(184, 229, 88);
+    padding: 10px;
+    border-radius: 58px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.104);
+    align-items: center; 
+    justify-content: center;
+    padding-top: 100px;
+    margin: 180px;
+}
+
+button{
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: bisque;
+}
+
+  
+table {
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  
+  
+  table tr {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    
+  
+  }
+th , td {
+ padding: 20px;
+ text-align: center;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+.input{
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    margin: 100px;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.104);
+
+}
+
+.produit{
+    background-color: rgb(184, 229, 88);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.104);
+    margin: 20px;
+}
+
+.look{
+    display: 5px;
+}
