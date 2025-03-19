@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Models\Client;
+
 
 class NotificationController extends Controller
 {
@@ -14,17 +16,25 @@ class NotificationController extends Controller
         ]);
     
         $client = Client::where('email', $request->email)->firstOrFail();
-        $notifications = Notification::where('client_id', $client->id)->get();
+    
+        // Charger les relations produit et commande pour éviter les requêtes multiples dans la vue
+        $notifications = Notification::where('client_id', $client->id)
+            ->with(['produit', 'commande'])
+            ->orderBy('date_envoi', 'desc')
+            ->get();
     
         return view('notifications.index', compact('notifications'));
     }
-
-
-    public function markAsRead($id)
+    
+    public function markAsRead($id, Request $request)
     {
         $notification = Notification::findOrFail($id);
         $notification->update(['is_viewed' => true]);
-
-        return redirect()->route('notifications.index')->with('message', 'Notification marquée comme lue.');
+    
+        return redirect()->route('notifications.index', ['email' => $request->query('email')])
+            ->with('message', 'Notification marquée comme lue.');
     }
+    
+
+   
 }

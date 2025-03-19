@@ -2,22 +2,32 @@
 
 @section('content')
 <div class="container">
-    <h2>Vos notifications</h2>
+    <h2 class="mb-3">Vos notifications</h2>
 
     @if($notifications->count() > 0)
         <ul class="list-group">
             @foreach($notifications as $notification)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ $notification->message }}
+                    <div>
+                        {{ $notification->message }}  
+                        @if($notification->is_viewed)
+                            <span class="badge bg-success ms-2">Lue</span>
+                        @endif
+                    </div>
                     <form method="POST" action="{{ route('notification.markAsRead', $notification->id) }}">
                         @csrf
-                        <button type="submit" class="btn btn-sm btn-success">Marquer comme lue</button>
+                        @method('PATCH') 
+                        <button type="submit" class="btn btn-sm btn-success" 
+                            {{ $notification->is_viewed ? 'disabled' : '' }}>
+                            Marquer comme lue
+                        </button>
                     </form>
+                    
                 </li>
             @endforeach
         </ul>
     @else
-        <p>Aucune notification.</p>
+        <p class="text-muted">Aucune notification.</p>
     @endif
 </div>
 @endsection

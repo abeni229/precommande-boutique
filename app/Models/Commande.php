@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory; 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Notification;
 
 
 class Commande extends Model
@@ -28,5 +29,25 @@ class Commande extends Model
     public function admin()
     {
         return $this->belongsTo(Admin::class);
+    }
+
+    // Relation avec la notification
+    public function notification()
+    {
+        return $this->hasOne(Notification::class);
+    }
+
+    protected static function booted()
+    {
+        static::created(function ($commande) {
+            Notification::create([
+                'client_id' => $commande->client_id,
+                'produit_id' => $commande->produit_id,
+                'commande_id' => $commande->id,
+                'message' => 'Votre commande pour ' . $commande->produit->nom . ' a été enregistrée.',
+                'date_envoi' => now(),
+                'is_viewed' => false,
+            ]);
+        });
     }
 }

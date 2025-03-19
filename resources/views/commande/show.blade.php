@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Détails de la commande</h1>
+    <div class="big">
+        <h1>Détails de la commande</h1><br><br>
 
         <div class="commande-details">
             <h2>Commande n°{{ $commande->id }}</h2>
@@ -15,7 +15,7 @@
             <p><strong>Statut de la commande :</strong> {{ $commande->etat }}</p>
             <p><strong>Date de commande :</strong> {{ $commande->created_at }}</p>
             <p><strong>Disponibilité prévue :</strong> {{ $commande->date_disponibilite }}</p>
-        </div>
+        </div><br>
 
         <a href="{{ route('commande.historique') }}" class="btn btn-secondary">Retour à l'historique des commandes</a>
     </div>

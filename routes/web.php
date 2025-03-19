@@ -29,10 +29,14 @@ Route::post('/precommande/{produit}', [ProduitController::class, 'precommander']
 
 // Route pour enregistrer une commande
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande.store');
-
+Route::get('/commande', [CommandeController::class, 'index'])->name('commande.index');
 
 // Route pour afficher l'historique des commandes
 Route::get('/historique', [CommandeController::class, 'historique'])->name('commande.historique');
+
+//route pour les détails des commandes
+Route::get('/commande/{id}', [CommandeController::class, 'show'])->name('commande.show');
+
 
 // Route pour afficher les notifications
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');

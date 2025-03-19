@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Mes Commandes</h2>
+    
     <table class="table">
         <thead>
             <tr>

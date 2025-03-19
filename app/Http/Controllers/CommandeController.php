@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class CommandeController extends Controller
 {
+    // Méthode pour afficher la liste des commandes
+    public function index()
+    {
+        $commandes = Commande::all(); // Récupérer toutes les commandes
+        return view('commande.index', compact('commandes')); // Afficher la vue
+    }
     /**
      * Afficher l'historique des commandes d'un client inscrit.
      */
@@ -112,4 +118,11 @@ class CommandeController extends Controller
 
         return redirect()->route('commande.index')->with('message', 'Le client a été notifié de la disponibilité du produit.');
     }
+
+        public function show($id)
+    {
+        $commande = Commande::findOrFail($id); // Récupère la commande ou renvoie une erreur 404
+        return view('commande.show', compact('commande')); // Affiche la commande
+    }
+
 }
