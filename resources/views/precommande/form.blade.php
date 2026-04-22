@@ -28,7 +28,13 @@
     <input type="text" name="adresse" required><br>
     <br>
 
-    <button type="submit">Passer la commande</button>
+    <button type="submit">Passer la commande</button><br>
+
+
+    <br>
+    <a href="{{ route('commande.index') }}">Voir mes commandes</a> |
+    <a href="{{ route('notifications.index') }}">Voir mes notifications</a>
+
 </form>
  
 

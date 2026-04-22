@@ -37,12 +37,13 @@ Route::get('/historique', [CommandeController::class, 'historique'])->name('comm
 //route pour les détails des commandes
 Route::get('/commande/{id}', [CommandeController::class, 'show'])->name('commande.show');
 
-
-// Route pour afficher les notifications
+// Route pour afficher les notifications avec l'email
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
 // Route pour marquer une notification comme lue
 Route::post('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
+
+
 
 // Routes protégées pour l'admin
 Route::middleware('admin')->prefix('admin')->group(function () {
@@ -50,7 +51,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     
     // Route pour afficher les commandes
-    Route::get('/commandes', [AdminController::class, 'commandes'])->name('admin.commandes');
+    Route::get('/commandges', [AdminController::class, 'commandes'])->name('admin.commandes');
     
     // Liste des produits (en rupture et en stock) pour l'admin
     Route::get('/produits', [ProduitController::class, 'adminIndex'])->name('admin.produits.index');

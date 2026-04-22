@@ -9,7 +9,8 @@ class Notification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_id', 'produit_id', 'commande_id', 'message', 'date_envoi' ,];
+    protected $fillable = ['client_id', 'produit_id', 'commande_id', 'message', 'date_envoi', 'is_viewed'];
+
 
     // Relation avec le client
     public function client()

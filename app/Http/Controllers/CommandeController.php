@@ -91,7 +91,7 @@ class CommandeController extends Controller
             // Retourner la vue avec les détails du produit
             return view('precommande.form', compact('produit'));
         }
-    
+   
 
     /**
      * Notifier un client quand son produit devient disponible.

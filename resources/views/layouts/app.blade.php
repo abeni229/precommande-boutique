@@ -1,26 +1,16 @@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre Application</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-   
+    <title>@yield('title', 'Boutique Précommande')</title>
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @endif
 </head>
-<body>
-    <header>
-        <h1>Bienvenue sur votre application</h1><br>
-        <br>
-        
-        
-      
-    </header>
-    <main>
-        @yield('content')
-    </main><br>
-    <footer>
-        <p>&copy; 2025 Votre Application. Tous droits réservés.</p>
-    </footer>
+<body class="@yield('body-class')">
+    @yield('content')
 </body>
 </html>
