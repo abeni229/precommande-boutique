@@ -22,6 +22,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+
 // Route pour précommander un produit
 Route::post('/precommande/{produit}', [ProduitController::class, 'precommander'])->name('precommande');
 
@@ -51,7 +59,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     
     // Route pour afficher les commandes
-    Route::get('/commandges', [AdminController::class, 'commandes'])->name('admin.commandes');
+    Route::get('/commandes', [AdminController::class, 'commandes'])->name('admin.commandes');
     
     // Liste des produits (en rupture et en stock) pour l'admin
     Route::get('/produits', [ProduitController::class, 'adminIndex'])->name('admin.produits.index');

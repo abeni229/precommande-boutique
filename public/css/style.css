@@ -78,13 +78,19 @@ a:hover {
 }
 
 button{
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    background-color: #f97316;
+    color: #ffffff;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
-    color: bisque;
+    box-shadow: 0 10px 24px rgba(249,115,22,0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #ea580c;
+    transform: translateY(-1px);
 }
 
   

@@ -55,7 +55,7 @@ class AdminController extends Controller
     $commande = Commande::find($id);
 
     if ($commande) {
-        $commande->etat = 'validée';
+        $commande->etat = 'validee';
         $commande->save();
         return redirect()->back()->with('success', 'Commande validée avec succès.');
     }
@@ -68,7 +68,7 @@ public function refuserCommande($id)
     $commande = Commande::find($id);
 
     if ($commande) {
-        $commande->etat = 'refusée';
+        $commande->etat = 'annulee';
         $commande->save();
         return redirect()->back()->with('error', 'Commande refusée.');
     }

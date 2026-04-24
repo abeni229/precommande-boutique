@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProduitController extends Controller
 {
@@ -56,15 +57,27 @@ class ProduitController extends Controller
         'prix' => 'required|numeric',
         'quantite' => 'required|integer',
         'statut' => 'required|string|in:en stock,rupture',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
     ]);
 
-    // Création du produit
     $produit = new Produit();
     $produit->nom = $request->input('nom');
     $produit->prix = $request->input('prix');
     $produit->quantite = $request->input('quantite');
     $produit->statut = $request->input('statut');
     $produit->admin_id = Auth::guard('admin')->id();  // Associer l'admin connecté
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $destination = public_path('images/produits');
+        if (!File::exists($destination)) {
+            File::makeDirectory($destination, 0755, true);
+        }
+        $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\.\-]/', '_', $image->getClientOriginalName());
+        $image->move($destination, $filename);
+        $produit->image = 'images/produits/' . $filename;
+    }
+
     $produit->save();
 
     return redirect()->route('admin.produits.index')->with('success', 'Produit ajouté avec succès.');
@@ -78,16 +91,32 @@ class ProduitController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validation des données
         $request->validate([
             'nom' => 'required|string',
             'prix' => 'required|numeric',
             'quantite' => 'required|integer',
             'statut' => 'required|string|in:en stock,rupture',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $produit = Produit::findOrFail($id);
-        $produit->update($request->all());
+        $data = $request->only(['nom', 'prix', 'quantite', 'statut']);
+
+        if ($request->hasFile('image')) {
+            if ($produit->image && File::exists(public_path($produit->image))) {
+                File::delete(public_path($produit->image));
+            }
+            $image = $request->file('image');
+            $destination = public_path('images/produits');
+            if (!File::exists($destination)) {
+                File::makeDirectory($destination, 0755, true);
+            }
+            $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\.\-]/', '_', $image->getClientOriginalName());
+            $image->move($destination, $filename);
+            $data['image'] = 'images/produits/' . $filename;
+        }
+
+        $produit->update($data);
 
         return redirect()->route('admin.produits.index')->with('success', 'Produit mis à jour avec succès.');
     }
